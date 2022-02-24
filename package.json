@@ -1,0 +1,49 @@
+{
+  "name": "dev-and-talent",
+  "version": "1.0.0",
+  "description": "Nodejs training for jobandtalent",
+  "main": "server.ts",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src/**/*.ts",
+    "format": "eslint src/**/*.ts --fix"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ireneguijarro/dev-and-talent.git"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "typescript"
+  ],
+  "author": "ireneguijarro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ireneguijarro/dev-and-talent/issues"
+  },
+  "homepage": "https://github.com/ireneguijarro/dev-and-talent#readme",
+  "dependencies": {
+    "@typescript-eslint/parser": "^5.12.1",
+    "body-parser": "^1.19.2",
+    "express": "^4.17.3",
+    "rollbar": "^2.24.0",
+    "ts-node": "^10.5.0",
+    "typescript": "^4.5.5"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.12.1",
+    "@tsconfig/node16-strictest-esm": "^1.0.0",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.1",
+    "husky": "^7.0.4"
+  }
+}
