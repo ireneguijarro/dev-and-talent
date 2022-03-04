@@ -1,6 +1,6 @@
 import express from 'express';
 import { createConnection } from 'typeorm';
-import users from './user';
+import users from './routes/users.routes';
 
 const app = express();
 const port = 3000;
