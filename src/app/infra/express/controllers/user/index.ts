@@ -1,3 +1,5 @@
-import findAllUsersController from './findAll';
+import findAllUsersController from './find-all.controller';
+import findOneUserController from './find-one.controller';
+import createUserController from './create.controller';
 
-export { findAllUsersController };
+export { findAllUsersController, findOneUserController, createUserController };

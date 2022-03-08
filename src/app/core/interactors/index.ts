@@ -1,7 +1,11 @@
-import { UserRepository } from '../../infra/typeorm/repositories/UserRepository';
-import UserInteractor from './UserInteractor';
+import { Connection } from 'typeorm';
+import userRepositoryImplementation from '../../infra/typeorm/repositories/user-repository-implementation';
+import { UserRepository } from '../repositories/User.repository';
+import UserInteractor from './user-interactor';
 
-const userRepository = new UserRepository();
-const userInteractor = new UserInteractor(userRepository);
+let userInteractor: UserRepository | null = null;
+const createUserInteractor = (connection: Connection) => {
+  userInteractor = UserInteractor(userRepositoryImplementation(connection));
+};
 
-export { userInteractor };
+export { userInteractor, createUserInteractor };

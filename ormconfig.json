@@ -7,5 +7,9 @@
   "database": "dev-and-talent",
   "synchronize": true,
   "logging": false,
-  "entities": ["src/app/infra/typeorm/entity/**.ts"]
+  "entities": ["src/app/infra/typeorm/entity/**.ts"],
+  "migrations": ["src/app/infra/typeorm/migration/**.ts"],
+  "cli": {
+    "migrationsDir": "src/app/infra/typeorm/migration"
+  }
 }
