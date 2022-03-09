@@ -1,13 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
 import { userInteractor } from '../../../../core/interactors';
 
-const createUserController = async (req: Request, res: Response, next: NextFunction) => {
+const findOneUserController = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const user = await userInteractor?.create(req.body);
+    const user = await userInteractor?.findOne(req.params.id);
     res.send({ user });
   } catch (error) {
     return next(error);
   }
 };
 
-export default createUserController;
+export default findOneUserController;

@@ -6,8 +6,8 @@ import { UserRepository } from '../../../core/repositories/User.repository';
 const userRepositoryImplementation = (connection: Connection): UserRepository => {
   const repositoryORM = connection.getRepository<User>(UserEntity);
 
-  const findOne = async (id: string): Promise<User | undefined> => {
-    const user = await repositoryORM.findOne(id);
+  const findOne = async (id: string): Promise<User> => {
+    const user = await repositoryORM.findOneOrFail(id);
     return user;
   };
 
@@ -16,20 +16,18 @@ const userRepositoryImplementation = (connection: Connection): UserRepository =>
     return users;
   };
 
-  const create = async (user: PartialUser): Promise<User | undefined> => {
+  const create = async (user: PartialUser): Promise<User> => {
     const createdUser = await repositoryORM.insert(user);
     const idUpdated = createdUser.generatedMaps[0].id;
-    return await findOne(idUpdated);
+    return await repositoryORM.findOneOrFail(idUpdated);
   };
 
-  const update = async (id: string, user: PartialUser): Promise<User | undefined> => {
-    await repositoryORM.save(user);
-    const updateResult = await repositoryORM.update({ id }, user);
-    const idUpdated = updateResult.generatedMaps[0].id;
-    return await findOne(idUpdated);
+  const update = async (id: string, user: PartialUser): Promise<User> => {
+    await repositoryORM.update(id, user);
+    return await repositoryORM.findOneOrFail(id);
   };
 
-  const remove = async (id: string): Promise<User> => {
+  const remove = async (id: string): Promise<void> => {
     throw new Error('Method not implemented.');
   };
 
@@ -39,7 +37,7 @@ const userRepositoryImplementation = (connection: Connection): UserRepository =>
     findAll,
     create,
     update,
-    delete: remove,
+    remove,
   };
 };
 

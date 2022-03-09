@@ -1,12 +1,12 @@
 import { PartialUser, User } from '../entities/user';
 import { UserRepository } from '../repositories/User.repository';
+import { NO_USERS_FOUND, NO_USER_FOUND } from './errors';
 
 const userInteractor = (userRepository: UserRepository): UserRepository => {
   const findAll = async (): Promise<User[]> => {
     const users = await userRepository.findAll();
-    console.log({ users });
     if (!users) {
-      throw new Error('No users found');
+      throw new Error(NO_USERS_FOUND);
     }
     return users;
   };
@@ -14,7 +14,7 @@ const userInteractor = (userRepository: UserRepository): UserRepository => {
   const findOne = async (id: string): Promise<User> => {
     const user = await userRepository.findOne(id);
     if (!user) {
-      throw new Error('No user found');
+      throw new Error(NO_USER_FOUND);
     }
     return user;
   };
@@ -24,15 +24,15 @@ const userInteractor = (userRepository: UserRepository): UserRepository => {
     return createdUser;
   };
 
-  const update = async (id: string, user: PartialUser): Promise<User | undefined> => {
+  const update = async (id: string, user: PartialUser): Promise<User> => {
     await findOne(id);
     const updatedUser = await userRepository.update(id, user);
     return updatedUser;
   };
 
-  const remove = async (id: string): Promise<User> => {
-    const deletedUser = await userRepository.delete(id);
-    return deletedUser;
+  const remove = async (id: string): Promise<void> => {
+    await userRepository.remove(id);
+    return;
   };
 
   return {
@@ -40,7 +40,7 @@ const userInteractor = (userRepository: UserRepository): UserRepository => {
     findOne,
     create,
     update,
-    delete: remove,
+    remove,
   };
 };
 
