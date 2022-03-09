@@ -4,6 +4,7 @@ import { UserRepository } from '../repositories/User.repository';
 const userInteractor = (userRepository: UserRepository): UserRepository => {
   const findAll = async (): Promise<User[]> => {
     const users = await userRepository.findAll();
+    console.log({ users });
     if (!users) {
       throw new Error('No users found');
     }
