@@ -1,5 +1,5 @@
 import { Connection } from 'typeorm';
-import userRepositoryImplementation from '../../infra/typeorm/repositories/user-repository-implementation';
+import userRepositoryImplementation from '../../infra/typeorm/repositories/userRepositoryImplementation';
 import { UserRepository } from '../repositories/User.repository';
 import UserInteractor from './userInteractor';
 
