@@ -1,4 +1,4 @@
-import { PartialUser, User } from '../entities/user';
+import { PartialUser, User, UserAvailability } from '../entities/user';
 import { NO_USERS_FOUND, NO_USER_FOUND } from './errors';
 import userInteractor from './userInteractor';
 
@@ -22,7 +22,7 @@ const usersMock: User[] = [
   {
     id: 'abc',
     name: 'Irene',
-    availability: 'mornings',
+    availability: UserAvailability.MORNINGS,
     email: 'irene@email.com',
     country: 'Spain',
   },
@@ -30,7 +30,7 @@ const usersMock: User[] = [
 
 const partialUserMock: PartialUser = {
   name: 'Irene',
-  availability: 'mornings',
+  availability: UserAvailability.MORNINGS,
   email: 'irene@email.com',
   country: 'Spain',
 };

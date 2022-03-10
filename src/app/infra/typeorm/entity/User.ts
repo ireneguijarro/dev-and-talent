@@ -1,5 +1,5 @@
 import { EntitySchema } from 'typeorm';
-import { User } from '../../../core/entities/user';
+import { User, UserAvailability } from '../../../core/entities/user';
 
 export const UserEntity = new EntitySchema<User>({
   name: 'user',
@@ -19,7 +19,8 @@ export const UserEntity = new EntitySchema<User>({
       type: String,
     },
     availability: {
-      type: String,
+      type: 'enum',
+      enum: UserAvailability,
     },
   },
 });
