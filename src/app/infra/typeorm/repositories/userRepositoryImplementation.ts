@@ -2,6 +2,7 @@ import { UserEntity } from '../entity/User';
 import { PartialUser, User } from '../../../core/entities/user';
 import { Connection } from 'typeorm';
 import { UserRepository } from '../../../core/repositories/User.repository';
+import { DeleteResponse } from '../../../core/entities/Response.interface';
 
 const userRepositoryImplementation = (connection: Connection): UserRepository => {
   const repositoryORM = connection.getRepository<User>(UserEntity);
@@ -27,8 +28,9 @@ const userRepositoryImplementation = (connection: Connection): UserRepository =>
     return await repositoryORM.findOneOrFail(id);
   };
 
-  const remove = async (id: string): Promise<void> => {
-    throw new Error('Method not implemented.');
+  const remove = async (id: string): Promise<DeleteResponse> => {
+    const { affected } = await repositoryORM.delete(id);
+    return affected;
   };
 
   return {

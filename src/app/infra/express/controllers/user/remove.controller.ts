@@ -3,8 +3,11 @@ import { userInteractor } from '../../../../core/interactors';
 
 const removeUserController = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    await userInteractor?.remove(req.params.id);
-    res.sendStatus(202);
+    const affected = await userInteractor?.remove(req.params.id);
+    if (affected) {
+      res.sendStatus(202);
+    }
+    res.sendStatus(204);
   } catch (error) {
     return next(error);
   }

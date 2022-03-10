@@ -1,3 +1,4 @@
+import { DeleteResponse } from '../entities/Response.interface';
 import { PartialUser, User } from '../entities/user';
 import { UserRepository } from '../repositories/User.repository';
 import { NO_USERS_FOUND, NO_USER_FOUND } from './errors';
@@ -30,9 +31,8 @@ const userInteractor = (userRepository: UserRepository): UserRepository => {
     return updatedUser;
   };
 
-  const remove = async (id: string): Promise<void> => {
-    await userRepository.remove(id);
-    return;
+  const remove = async (id: string): Promise<DeleteResponse> => {
+    return await userRepository.remove(id);
   };
 
   return {
