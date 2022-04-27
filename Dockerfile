@@ -8,6 +8,7 @@ COPY package*.json ./
 COPY tsconfig.json ./
 COPY .env ./
 COPY ormconfig.json ./
+COPY jest.config.js ./
 
 RUN npm install
 # If you are building your code for production
