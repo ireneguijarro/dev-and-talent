@@ -5,9 +5,15 @@ import { createUserInteractor } from '../../core/interactors';
 import users from './routes/users.routes';
 import auth from './routes/auth.routes';
 import { checkJwt } from './middlewares/checkJwt';
+import cors from 'cors';
 
 const app = express();
 app.use(bodyParser.json());
+app.use(
+  cors({
+    origin: '*',
+  }),
+);
 const port = 3000;
 
 createConnection().then(async (connection: Connection) => {
