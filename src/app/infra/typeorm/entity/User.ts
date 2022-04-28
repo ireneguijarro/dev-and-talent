@@ -12,6 +12,9 @@ export const UserEntity = new EntitySchema<User>({
     name: {
       type: String,
     },
+    password: {
+      type: String,
+    },
     country: {
       type: String,
     },

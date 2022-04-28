@@ -22,6 +22,7 @@ const usersMock: User[] = [
   {
     id: 'abc',
     name: 'Irene',
+    password: 'password',
     availability: UserAvailability.MORNINGS,
     email: 'irene@email.com',
     country: 'Spain',
@@ -30,6 +31,7 @@ const usersMock: User[] = [
 
 const partialUserMock: PartialUser = {
   name: 'Irene',
+  password: 'password',
   availability: UserAvailability.MORNINGS,
   email: 'irene@email.com',
   country: 'Spain',
@@ -66,19 +68,19 @@ describe('User Interactor', () => {
     it('Should return the same user repository returns', async () => {
       findOne.mockReturnValue(usersMock[0]);
       const interactor = userInteractor(userRepositoryMock());
-      await expect(interactor.findOne(usersMock[0].id)).resolves.toEqual(usersMock[0]);
+      await expect(interactor.findOne({ id: usersMock[0].id })).resolves.toEqual(usersMock[0]);
     });
 
     it('Should throw Error when repository return null', async () => {
       findOne.mockReturnValue(null);
       const interactor = userInteractor(userRepositoryMock());
-      await expect(interactor.findOne('abc')).rejects.toEqual(new Error(NO_USER_FOUND));
+      await expect(interactor.findOne({ id: 'abc' })).rejects.toEqual(new Error(NO_USER_FOUND));
     });
 
     it('Should throw Error when repository return undefined', async () => {
       findOne.mockReturnValue(undefined);
       const interactor = userInteractor(userRepositoryMock());
-      await expect(interactor.findOne('abc')).rejects.toEqual(new Error(NO_USER_FOUND));
+      await expect(interactor.findOne({ id: 'abc' })).rejects.toEqual(new Error(NO_USER_FOUND));
     });
   });
 
@@ -96,7 +98,7 @@ describe('User Interactor', () => {
       update.mockReturnValue(usersMock[0]);
       const interactor = userInteractor(userRepositoryMock());
       await expect(interactor.update('id', partialUserMock)).resolves.toEqual(usersMock[0]);
-      expect(findOne).toHaveBeenCalledWith('id');
+      expect(findOne).toHaveBeenCalledWith({ id: 'id' });
     });
 
     it('Should return error if user does not exist', async () => {

@@ -9,7 +9,7 @@ const findOneUserController = async (req: Request, res: Response, next: NextFunc
     };
     const data = req.params;
     validate({ properties, data });
-    const user = await userInteractor?.findOne(req.params.id);
+    const user = await userInteractor?.findOne({ id: req.params.id });
     res.send({ user });
   } catch (error) {
     return next(error);

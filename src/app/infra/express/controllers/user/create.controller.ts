@@ -12,6 +12,7 @@ const createUserController = async (req: Request, res: Response, next: NextFunct
     type: 'object',
     properties: {
       name: { type: 'string' },
+      password: { type: 'string' },
       availability: { type: 'string' },
       email: { type: 'string', format: 'email' },
       country: { type: 'string' },

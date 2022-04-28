@@ -7,8 +7,8 @@ import { DeleteResponse } from '../../../core/entities/Response.interface';
 const userRepositoryImplementation = (connection: Connection): UserRepository => {
   const repositoryORM = connection.getRepository<User>(UserEntity);
 
-  const findOne = async (id: string): Promise<User> => {
-    const user = await repositoryORM.findOneOrFail(id);
+  const findOne = async (key: { [key: string]: string }): Promise<User> => {
+    const user = await repositoryORM.findOneOrFail({ where: key });
     return user;
   };
 

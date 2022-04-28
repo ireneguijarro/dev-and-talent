@@ -12,8 +12,8 @@ const userInteractor = (userRepository: UserRepository): UserRepository => {
     return users;
   };
 
-  const findOne = async (id: string): Promise<User> => {
-    const user = await userRepository.findOne(id);
+  const findOne = async (key: { [key: string]: string }): Promise<User> => {
+    const user = await userRepository.findOne(key);
     if (!user) {
       throw new Error(NO_USER_FOUND);
     }
@@ -26,7 +26,7 @@ const userInteractor = (userRepository: UserRepository): UserRepository => {
   };
 
   const update = async (id: string, user: PartialUser): Promise<User> => {
-    await findOne(id);
+    await findOne({ id });
     const updatedUser = await userRepository.update(id, user);
     return updatedUser;
   };
