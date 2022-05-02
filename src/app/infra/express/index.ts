@@ -1,8 +1,9 @@
 import bodyParser from 'body-parser';
 import express from 'express';
 import { Connection, createConnection } from 'typeorm';
-import { createUserInteractor } from '../../core/interactors';
+import { createInteractors } from '../../core/interactors';
 import users from './routes/users.routes';
+import clients from './routes/clients.routes';
 import auth from './routes/auth.routes';
 import { checkJwt } from './middlewares/checkJwt';
 import cors from 'cors';
@@ -17,8 +18,9 @@ app.use(
 const port = 3000;
 
 createConnection().then(async (connection: Connection) => {
-  createUserInteractor(connection);
+  createInteractors(connection);
   app.use('/users', checkJwt, users);
+  app.use('/clients', checkJwt, clients);
   app.use('/auth', auth);
 
   app.listen(port, () => {
