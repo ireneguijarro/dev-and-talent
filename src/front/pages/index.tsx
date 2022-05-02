@@ -1,30 +1,27 @@
 import type { NextPage } from 'next';
-import Head from 'next/head';
-import { Button, Container, Card, Row, Spacer } from '@nextui-org/react';
+import { Card, Spacer, Text } from '@nextui-org/react';
 import Login from '../components/login';
+import Users from '../components/users';
+import Link from 'next/link';
 
 const Home: NextPage = () => {
   return (
-    <div>
-      <Head>
-        <title>dev-and-talent</title>
-      </Head>
+    <>
+      <Card css={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Card.Body>
+          <Login />
+        </Card.Body>
+        <Spacer y={2} />
+        <Card.Footer>
+          <Text small>You don&apos;t have an account yet?&nbsp;</Text>
+          <Link href={'/register'}>Register</Link>
+        </Card.Footer>
+      </Card>
 
-      <main>
-        <Container>
-          <h1>dev-and-talent</h1>
-          <Card css={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Login />
-            <Spacer y={2} />
-            <Row justify="center">
-              <Button>Login</Button>
-              <Spacer x={2} />
-              <Button>Register</Button>
-            </Row>
-          </Card>
-        </Container>
-      </main>
-    </div>
+      <Spacer y={2} />
+
+      <Users />
+    </>
   );
 };
 

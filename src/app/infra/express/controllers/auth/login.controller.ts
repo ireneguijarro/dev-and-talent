@@ -8,6 +8,7 @@ const loginController = async (req: Request, res: Response) => {
   const { name, password } = req.body;
   if (!(name && password)) {
     res.status(400).send();
+    return;
   }
 
   try {

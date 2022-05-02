@@ -7,7 +7,7 @@ import { userInteractor } from '../../../../core/interactors';
 const ajv = new Ajv();
 addFormats(ajv);
 
-const createUserController = async (req: Request, res: Response, next: NextFunction) => {
+const registerController = async (req: Request, res: Response, next: NextFunction) => {
   const schema: JSONSchemaType<PartialUser> = {
     type: 'object',
     properties: {
@@ -35,4 +35,4 @@ const createUserController = async (req: Request, res: Response, next: NextFunct
   }
 };
 
-export default createUserController;
+export default registerController;
